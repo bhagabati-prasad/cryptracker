@@ -1,0 +1,40 @@
+header {
+  width: 100%;
+}
+
+header nav {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem 0;
+}
+
+header nav .logo a {
+  text-decoration: none;
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+header nav .profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header nav .profile p {
+  margin-bottom: 0;
+}
+/*# sourceMappingURL=navbar.css.map */

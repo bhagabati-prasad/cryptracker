@@ -25,18 +25,20 @@ app.use(cookieParser());
 // morgan for logging every request status on console
 app.use(morgan('dev'));
 
-// serve static folder to serve files --
+// serve static folder to serve files
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // ROUTES --
-// app.get('/', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
-// });
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
+});
+
+// API Routes
 app.use('/api/user', UserRoutes);
 
 // production build for reactjs --
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
+});
 
 module.exports = app;
