@@ -1,13 +1,34 @@
+import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { CoinContext } from '../../App';
+import { CoinContext, UserContext } from '../../App';
 import '../../styles/all_currency_section.css';
 import CoinCard from './CoinCard';
 
 const FavouriteList = () => {
   const { coins } = useContext(CoinContext);
-  const [allCoins, setAllCoins] = useState(coins);
+  const { user } = useContext(UserContext);
+  const [favCoins, setFavCoins] = useState(coins);
+  const [favs, setFavs] = useState(user?.favourites || []);
 
-  useEffect(() => setAllCoins(coins), [coins]);
+  const handleFavourite = (id) => {
+    console.log({ id });
+    axios
+      .get(`/api/user/favourite/${id}`)
+      .then((res) => setFavs(res.data?.favourites))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    setFavs(user?.favourites || []);
+    let filteredCoins = [];
+    user?.favourites.map((fav) => {
+      const filtCoin = coins.filter((coin) => coin.id.toLowerCase() === fav);
+      filteredCoins.push(filtCoin);
+    });
+    filteredCoins = filteredCoins.flat(Infinity);
+    setFavCoins(filteredCoins);
+    return;
+  }, [coins, user, favs]);
 
   return (
     <>
@@ -20,12 +41,16 @@ const FavouriteList = () => {
           </div>
           <hr />
           <div className='row currency_section'>
-            {!!allCoins.length &&
-              allCoins
+            {!!favCoins.length &&
+              favCoins
                 // .slice(0, 9)
                 .map((coin) => (
                   <div className='col-md-4 col-12' key={coin?.id}>
-                    <CoinCard coin={coin} />
+                    <CoinCard
+                      coin={coin}
+                      fav={favs.includes(coin?.id)}
+                      handleFavourite={handleFavourite}
+                    />
                   </div>
                 ))}
           </div>

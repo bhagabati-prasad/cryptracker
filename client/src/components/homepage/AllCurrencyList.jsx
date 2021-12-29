@@ -1,13 +1,30 @@
+import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { CoinContext } from '../../App';
+import { CoinContext, UserContext } from '../../App';
 import '../../styles/all_currency_section.css';
 import CoinCard from './CoinCard';
 
 const AllCurrencyList = () => {
   const { coins } = useContext(CoinContext);
-  const [allCoins, setAllCoins] = useState(coins);
+  const { user } = useContext(UserContext);
 
-  useEffect(() => setAllCoins(coins), [coins]);
+  const [allCoins, setAllCoins] = useState(coins);
+  const [favs, setFavs] = useState(user?.favourites || []);
+
+  useEffect(() => {
+    setAllCoins(coins);
+    setFavs(user?.favourites || []);
+    return;
+  }, [coins, favs, user]);
+
+  const handleFavourite = (id) => {
+    axios
+      .get(`/api/user/favourite/${id}`)
+      .then((res) => {
+        setFavs(res.data?.favourites);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const handleInputSearch = (e) => {
     const curVal = e.target.value;
@@ -43,10 +60,13 @@ const AllCurrencyList = () => {
                 .sort((a, b) =>
                   a.name > b.name ? 1 : b.name > a.name ? -1 : 0
                 )
-                // .slice(0, 9)
                 .map((coin) => (
                   <div className='col-md-4 col-12' key={coin?.id}>
-                    <CoinCard coin={coin} />
+                    <CoinCard
+                      coin={coin}
+                      fav={favs.includes(coin.id)}
+                      handleFavourite={handleFavourite}
+                    />
                   </div>
                 ))}
           </div>

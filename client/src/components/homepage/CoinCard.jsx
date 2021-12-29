@@ -1,8 +1,4 @@
-const CoinCard = ({ coin }) => {
-  const handleFavourite = (id) => {
-    console.log('coin id-- ', id);
-  };
-
+const CoinCard = ({ coin, fav, handleFavourite }) => {
   return (
     <>
       <div className='card'>
@@ -18,14 +14,21 @@ const CoinCard = ({ coin }) => {
             </p>
           </div>
           <div className='card_body_fav'>
-            <span
-              onClick={() => handleFavourite(coin?.id)}
-              className='fav_icon'
-            >
-              {/* <span className='fav_icon active'> */}
-              <i className='far fa-heart'></i>
-              {/* <i className='fas fa-heart'></i> */}
-            </span>
+            {fav ? (
+              <span
+                onClick={() => handleFavourite(coin?.id)}
+                className='fav_icon active'
+              >
+                <i className='fas fa-heart'></i>
+              </span>
+            ) : (
+              <span
+                onClick={() => handleFavourite(coin?.id)}
+                className='fav_icon'
+              >
+                <i className='far fa-heart'></i>
+              </span>
+            )}
           </div>
         </div>
       </div>
