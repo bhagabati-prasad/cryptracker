@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import '../../styles/tab_section.scss';
+import '../../styles/tab_section.css';
 
 const TabSection = () => {
   const location = useLocation();
