@@ -32,8 +32,9 @@ function App() {
       .get(cryptoURL)
       .then((res) => setCoins(res.data))
       .catch((error) => console.log(error.response));
+
     return;
-  }, []);
+  }, [favs.length]);
 
   return (
     <>

@@ -6,14 +6,14 @@ import CoinCard from './CoinCard';
 
 const AllCurrencyList = () => {
   const { coins } = useContext(CoinContext);
-  const { user } = useContext(UserContext);
+  const { user, favs, setFavs } = useContext(UserContext);
 
   const [allCoins, setAllCoins] = useState(coins);
-  const [favs, setFavs] = useState(user?.favourites || []);
+  // const [favs, setFavs] = useState(favs);
 
   useEffect(() => {
     setAllCoins(coins);
-    setFavs(user?.favourites || []);
+    // setFavs(user?.favourites || []);
     return;
   }, [coins, favs, user]);
 

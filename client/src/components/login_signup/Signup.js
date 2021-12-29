@@ -34,7 +34,7 @@ const Signup = () => {
         const res = await axios.post('/api/user/signup', signup);
         if (res.data) {
           setStatus({ success: 'Signup successful' });
-          history.push('/');
+          window.location.reload(false);
         } else {
           setStatus({ error: 'Unable to create user' });
         }

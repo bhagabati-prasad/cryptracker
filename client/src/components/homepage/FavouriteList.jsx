@@ -6,9 +6,9 @@ import CoinCard from './CoinCard';
 
 const FavouriteList = () => {
   const { coins } = useContext(CoinContext);
-  const { user } = useContext(UserContext);
+  const { user, favs, setFavs } = useContext(UserContext);
   const [favCoins, setFavCoins] = useState(coins);
-  const [favs, setFavs] = useState(user?.favourites || []);
+  // const [favs, setFavs] = useState(user?.favourites || []);
 
   const handleFavourite = (id) => {
     console.log({ id });
@@ -19,7 +19,7 @@ const FavouriteList = () => {
   };
 
   useEffect(() => {
-    setFavs(user?.favourites || []);
+    // setFavs(user?.favourites || []);
     let filteredCoins = [];
     user?.favourites.map((fav) => {
       const filtCoin = coins.filter((coin) => coin.id.toLowerCase() === fav);
@@ -41,7 +41,7 @@ const FavouriteList = () => {
           </div>
           <hr />
           <div className='row currency_section'>
-            {!!favCoins.length &&
+            {!!favCoins.length ? (
               favCoins
                 // .slice(0, 9)
                 .map((coin) => (
@@ -52,7 +52,10 @@ const FavouriteList = () => {
                       handleFavourite={handleFavourite}
                     />
                   </div>
-                ))}
+                ))
+            ) : (
+              <h3>Favourite list empty</h3>
+            )}
           </div>
         </div>
       </div>

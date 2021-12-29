@@ -29,9 +29,9 @@ const Login = () => {
         if (res?.data?.user) {
           setStatus({ success: 'Login successful' });
           if (res?.data?.user?.isHospitalAdmin || res?.data?.user?.isRahAdmin) {
-            history.push('/');
+            window.location.reload(false);
           } else {
-            history.push('/');
+            window.location.reload(false);
           }
         } else {
           setStatus({ error: 'Unable to login user' });
