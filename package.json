@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "client": "cd client && npm start",
+    "client": "cd client && npm start"
   },
   "engines": {
     "node": "14.x",
