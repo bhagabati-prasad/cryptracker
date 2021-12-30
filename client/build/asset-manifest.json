@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.14b037da.css",
+    "main.js": "/static/js/main.d988f784.js",
+    "static/media/blue-wave.jpg": "/static/media/blue-wave.0e77194ee905fcfe0c16.jpg",
+    "index.html": "/index.html",
+    "main.14b037da.css.map": "/static/css/main.14b037da.css.map",
+    "main.d988f784.js.map": "/static/js/main.d988f784.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.14b037da.css",
+    "static/js/main.d988f784.js"
+  ]
+}
